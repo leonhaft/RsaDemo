@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp2
+namespace RsaDemo
 {
     public class RsaXmlService : IRsaService
     {
@@ -46,6 +46,11 @@ namespace ConsoleApp2
         {
             File.WriteAllText(_privateKeyFileName, rsa.ToXmlString(true));
             File.WriteAllText(_publicKeyFileName, rsa.ToXmlString(false));
+        }
+
+        public void Export(RSACryptoServiceProvider rsa)
+        {
+            Export(rsa as RSA);
         }
     }
 }

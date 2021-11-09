@@ -5,12 +5,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp2
+namespace RsaDemo
 {
     public interface IRsaService
     {
         string Title { get; set; }
         void Export(RSA rsa);
+
+        void Export(RSACryptoServiceProvider rsa);
 
         string Encrypt(string data);
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ConsoleApp2
+namespace RsaDemo
 {
     internal class Program
     {
@@ -17,6 +17,7 @@ namespace ConsoleApp2
             RSA rsa = RSA.Create();
             //Save the public key information to an RSAParameters structure.  
             RSAParameters rsaKeyInfo = rsa.ExportParameters(false);
+            var rsaCsp = new RSACryptoServiceProvider();
 
             var p = DateTime.Now.Ticks;
 
@@ -26,7 +27,8 @@ namespace ConsoleApp2
             var rsaServices = new List<IRsaService>
             {
                 new RsaPemService(),
-                new RsaXmlService()
+                new RsaXmlService(),
+                new RsaCspService(),
             };
 
 
@@ -35,7 +37,7 @@ namespace ConsoleApp2
             {
                 Console.WriteLine($"---------------{service.Title}-------------");
 
-                service.Export(rsa);
+                service.Export(rsaCsp);
 
                 var encryptText = service.Encrypt(text);
 
